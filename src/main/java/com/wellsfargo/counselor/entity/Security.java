@@ -11,8 +11,9 @@ public class Security {
     @Column(name = "security_id", nullable = false)
     private Long securityId;
 
-    @Column(nullable = false)
-    private long portfolioId;
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id", nullable = false)
+    private Portfolio portfolio;
 
     @Column(nullable = false)
     private String name;
@@ -31,10 +32,10 @@ public class Security {
 
     protected Security() {}
 
-    public Security(long portfolioId, String name,
+    public Security(Portfolio portfolio, String name,
                     String category, double purchasePrice,
                     LocalDate purchaseDate, int quantity) {
-        this.portfolioId = portfolioId;
+        this.portfolio = portfolio;
         this.name = name;
         this.category = category;
         this.purchasePrice = purchasePrice;
@@ -47,7 +48,7 @@ public class Security {
     }
 
     public long getPortfolioId() {
-        return portfolioId;
+        return portfolio.getPortfolioId();
     }
 
     public String getName() {

@@ -11,8 +11,9 @@ public class Portfolio {
     @Column(nullable = false)
     private long portfolioId;
 
-    @Column(nullable = false)
-    private long clientId;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @Column(nullable = false)
     private LocalDate creationDate;
@@ -20,8 +21,8 @@ public class Portfolio {
 
     protected Portfolio() {}
 
-    public Portfolio(long clientId, LocalDate creationDate) {
-        this.clientId = clientId;
+    public Portfolio(Client client, LocalDate creationDate) {
+        this.client = client;
         this.creationDate = creationDate;
     }
 
@@ -30,7 +31,7 @@ public class Portfolio {
     }
 
     public long getClientId() {
-        return clientId;
+        return client.getClientId();
     }
 
     public LocalDate getCreationDate() {

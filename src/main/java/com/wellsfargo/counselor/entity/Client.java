@@ -9,8 +9,9 @@ public class Client {
     @Column(nullable = false)
     private Long clientId;
 
-    @Column(nullable = false)
-    private Long advisorId;
+    @ManyToOne
+    @JoinColumn(name = "advisor_id", nullable = false)
+    private Advisor advisor;
 
     @Column(nullable = false)
     private String firstName;
@@ -29,9 +30,9 @@ public class Client {
 
     protected Client() {}
 
-    public Client(Long advisorId, String firstName, String lastName,
+    public Client(Advisor advisor, String firstName, String lastName,
                   String address, String phone, String email) {
-        this.advisorId = advisorId;
+        this.advisor = advisor;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -44,7 +45,7 @@ public class Client {
     }
 
     public Long getAdvisorId() {
-        return advisorId;
+        return advisor.getAdvisorId();
     }
 
     public String getFirstName() {
